@@ -22,21 +22,17 @@ func codage_morse(mot_a_coder string) string {
 		for j:=0; j<len(alphabet); j++ {
 			if string(mot_a_coder[i]) == alphabet[j] {
 			//	fmt.Printf("%d", j)
-				resu += at_morse[j]	// lettre trouvé, on concatene dans resu toutes les lettres les unes a la suite des autres
-				// on ajoute / pour separer chaque lettres d'un mot sinon impossible de faire une partie decodage vu qu'il n'y a pas de meme quantité de .-
+				resu += at_morse[j]	
 				resu += "/"	
 			} else if string(mot_a_coder[i]) == " " {
-				resu += "_"	// permet de simuler un espace
-				// on va essayer d'eviter les 26 espaces
+				resu += "_"
 				previous_lettre := len(resu)-1
 				if string(resu[previous_lettre]) == "_" {
 					break
 				}
 			}
-			
 		}
 	}
-	//fmt.Println()
 	return resu
 	// fmt.Printf("%s\n", mot_coder)
 }
@@ -56,8 +52,8 @@ func decodage_morse(mot_a_decoder string) string {
 
 			for j:=0; j<len(at_morse); j++ {
 				if entmpo == at_morse[j] {
-					//	fmt.Printf("%d", j)
-					resu += alphabet[j]	// lettre trouvé, on concatene dans resu toutes les lettres les unes a la suite des autres
+					// fmt.Printf("%d", j)
+					resu += alphabet[j]
 					entmpo = ""
 					tempo = ""
 				}
@@ -72,9 +68,9 @@ func decodage_morse(mot_a_decoder string) string {
 }
 
 func main() {
-	// entree := "abcd zsx Remi 12 Gillou 34 90"	// marche
+	// entree := "abcd zsx Hello 12 World 34 90"
 	inputReader = bufio.NewReader(os.Stdin)
-	fmt.Println("Entrez la phrase que vous voulez coder en Morse : ")
+	fmt.Println("Type your text here : ")
 	inputt, err = inputReader.ReadString('\n')
 	if err == nil {
 		fmt.Printf("Entree : %s\n", inputt)
@@ -85,14 +81,9 @@ func main() {
 
 	//partie codage fonctionnelle
 	codage := codage_morse(mot_to_coder)
-	fmt.Printf("Codage du messsage : %s\n", codage)
+	fmt.Printf("Your text : %s\n", codage)
 
 	// partie decodage fonctionnelle
 	decodage := decodage_morse(codage)
-	fmt.Printf("Decodage du message : %s\n", decodage)
-	
-
-	
-
-
+	fmt.Printf("Your text : %s\n", decodage)
 }
